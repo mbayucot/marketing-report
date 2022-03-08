@@ -189,6 +189,7 @@ const DashboardPage = () => {
               <br />
               {selected && (
                 <iframe
+                  title="Marketing report"
                   width="100%"
                   height="100%"
                   src="https://datastudio.google.com/embed/reporting/1ldFFV3R1IGJTGG8BwScQhNXD2u7H_4Bh/page/MwXb"
