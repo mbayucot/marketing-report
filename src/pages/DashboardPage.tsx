@@ -13,7 +13,7 @@ const DashboardPage = () => {
   let history = useHistory();
   let { clientId } = useParams<Params>();
 
-  const found = clients.find((login) => login.id.toString() == clientId);
+  const found = clients.find((login) => login.id.toString() === clientId);
 
   const [selected, setSelected] = useState(false);
 
