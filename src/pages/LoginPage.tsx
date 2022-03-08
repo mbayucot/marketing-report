@@ -16,7 +16,7 @@ const LoginPage = () => {
     const password = event.target.password.value;
 
     const found = clients.find(
-      (login) => login.email == email && login.password == password
+      (login) => login.email === email && login.password === password
     );
     if (found) {
       history.push(`/dashboard/${found.id}`);
