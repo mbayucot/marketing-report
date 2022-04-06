@@ -5,10 +5,9 @@ import Form from "react-bootstrap/Form";
 import Table from "react-bootstrap/Table";
 import InputGroup from "react-bootstrap/InputGroup";
 import FormControl from "react-bootstrap/FormControl";
-import { useParams, useHistory } from "react-router-dom";
+import { useParams } from "react-router-dom";
 
 import { clients } from "../constants";
-import { forEach } from "react-bootstrap/ElementChildren";
 
 type Params = {
   accountId: string;
@@ -47,7 +46,6 @@ const ClientPage = () => {
     setShowConfirm(true);
   };
 
-  // @ts-ignore
   // @ts-ignore
   return (
     <>
@@ -103,7 +101,11 @@ const ClientPage = () => {
                 found.name.map((client: any, key) => (
                   <tr key={client.id}>
                     <td>{client.name}</td>
-                    <td>{client.link}</td>
+                    <td>
+                      <a href={client.link} target="_blank">
+                        {client.link}
+                      </a>
+                    </td>
                     <td>
                       <Button
                         variant="secondary"
@@ -134,7 +136,7 @@ const ClientPage = () => {
           <Modal.Body>
             <Form.Group className="mb-3" controlId="formBasicEmail">
               <Form.Label>Name</Form.Label>
-              <Form.Control type="text" />
+              <Form.Control type="text" required={true} />
             </Form.Group>
 
             <Form.Group className="mb-3" controlId="formBasicEmail">

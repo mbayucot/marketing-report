@@ -38,15 +38,26 @@ export const clients = [
     password: "pass123",
     client: "Aukum Group/Greystar",
     name: [
-      "Brookside 112",
-      "Cedar House",
-      "Adobe Ridge",
-      "Cantera",
-      "Cityscape at Lakeshore",
-      "Ora Apartments",
-      "Terra Vista at the Park",
-      "The Ridge at Mountain View",
-      "Tierra Del Sol",
+      {
+        id: 21,
+        name: "Brookside 112",
+        link: "https://datastudio.google.com/embed/reporting/1ldFFV3R1IGJTGG8BwScQhNXD2u7H_4Bh/page/MwXb",
+      },
+      {
+        id: 22,
+        name: "Cedar House",
+        link: "https://datastudio.google.com/embed/reporting/1ldFFV3R1IGJTGG8BwScQhNXD2u7H_4Bh/page/MwXb",
+      },
+      {
+        id: 23,
+        name: "Adobe Ridge",
+        link: "https://datastudio.google.com/embed/reporting/1ldFFV3R1IGJTGG8BwScQhNXD2u7H_4Bh/page/MwXb",
+      },
+      {
+        id: 24,
+        name: "Cantera",
+        link: "https://datastudio.google.com/embed/reporting/1ldFFV3R1IGJTGG8BwScQhNXD2u7H_4Bh/page/MwXb",
+      },
     ],
   },
   {
@@ -54,7 +65,18 @@ export const clients = [
     email: "admin3@email.com",
     password: "pass123",
     client: "Bellevue",
-    name: ["Bellevue at Avondale", "Bellevue at the Bluffs"],
+    name: [
+      {
+        id: 31,
+        name: "Bellevue at Avondale",
+        link: "https://datastudio.google.com/embed/reporting/1ldFFV3R1IGJTGG8BwScQhNXD2u7H_4Bh/page/MwXb",
+      },
+      {
+        id: 32,
+        name: "Bellevue at the Bluffs",
+        link: "https://datastudio.google.com/embed/reporting/1ldFFV3R1IGJTGG8BwScQhNXD2u7H_4Bh/page/MwXb",
+      },
+    ],
   },
   {
     id: 4,

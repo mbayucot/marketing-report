@@ -133,7 +133,7 @@ const AccountPage = () => {
           <Modal.Body>
             <Form.Group className="mb-3" controlId="formBasicEmail">
               <Form.Label>Name</Form.Label>
-              <Form.Control type="text" />
+              <Form.Control type="text" required={true} />
             </Form.Group>
 
             <Form.Group className="mb-3" controlId="formBasicEmail">
