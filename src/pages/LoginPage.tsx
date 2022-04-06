@@ -19,7 +19,7 @@ const LoginPage = () => {
       (login) => login.email === email && login.password === password
     );
     if (found) {
-      history.push(`/dashboard/${found.id}`);
+      history.push(`/account/${found.id}`);
       setError(false);
     } else {
       setError(true);
