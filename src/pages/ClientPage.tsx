@@ -8,17 +8,24 @@ import FormControl from "react-bootstrap/FormControl";
 import { useParams, useHistory } from "react-router-dom";
 
 import { clients } from "../constants";
+import { forEach } from "react-bootstrap/ElementChildren";
 
 type Params = {
   accountId: string;
 };
 
+type Client = {
+  id: string;
+  name: string;
+  link: string;
+};
+
 const ClientPage = () => {
   let { accountId } = useParams<Params>();
-  let history = useHistory();
   const [show, setShow] = useState(false);
   const [showEdit, setShowEdit] = useState(false);
   const [showConfirm, setShowConfirm] = useState(false);
+  const [selected, setSelected] = useState<Client>();
   const found = clients.find((login) => login.id.toString() === accountId);
 
   const handleClose = () => setShow(false);
@@ -28,18 +35,19 @@ const ClientPage = () => {
     handleShow();
   };
 
-  const onEditClick = () => {
+  const onEditClick = (id: any) => {
+    // @ts-ignore
+    let _clients: any = found.name;
+    let client = _clients.find((login: any) => login.id === id);
+    setSelected(client);
     setShowEdit(true);
   };
 
-  const onClientClick = () => {
-    history.push(`/clients`);
-  };
-
-  const onDeleteClick = () => {
+  const onDeleteClick = (id: any) => {
     setShowConfirm(true);
   };
 
+  // @ts-ignore
   // @ts-ignore
   return (
     <>
@@ -99,12 +107,15 @@ const ClientPage = () => {
                     <td>
                       <Button
                         variant="secondary"
-                        onClick={onEditClick}
+                        onClick={() => onEditClick(client.id)}
                         style={{ marginRight: "24px" }}
                       >
                         Edit
                       </Button>
-                      <Button variant="danger" onClick={onDeleteClick}>
+                      <Button
+                        variant="danger"
+                        onClick={() => onDeleteClick(client.id)}
+                      >
                         Delete
                       </Button>
                     </td>
@@ -148,30 +159,32 @@ const ClientPage = () => {
           <Modal.Title>Edit Client</Modal.Title>
         </Modal.Header>
         <Form>
-          <Modal.Body>
-            <Form.Group className="mb-3" controlId="formBasicEmail">
-              <Form.Label>Name</Form.Label>
-              <Form.Control type="text" />
-            </Form.Group>
+          {selected && (
+            <Modal.Body>
+              <Form.Group className="mb-3" controlId="formBasicEmail">
+                <Form.Label>Name</Form.Label>
+                <Form.Control type="text" defaultValue={selected.name} />
+              </Form.Group>
 
-            <Form.Group className="mb-3" controlId="formBasicEmail">
-              <Form.Label>Google Data Studio URL</Form.Label>
-              <Form.Control type="text" />
-            </Form.Group>
+              <Form.Group className="mb-3" controlId="formBasicEmail">
+                <Form.Label>Google Data Studio URL</Form.Label>
+                <Form.Control type="text" defaultValue={selected.link} />
+              </Form.Group>
 
-            <Modal.Footer>
-              <Button
-                variant="secondary"
-                onClick={() => setShowEdit(false)}
-                type="submit"
-              >
-                Close
-              </Button>
-              <Button variant="primary" onClick={() => setShowEdit(false)}>
-                Save Changes
-              </Button>
-            </Modal.Footer>
-          </Modal.Body>
+              <Modal.Footer>
+                <Button
+                  variant="secondary"
+                  onClick={() => setShowEdit(false)}
+                  type="submit"
+                >
+                  Close
+                </Button>
+                <Button variant="primary" onClick={() => setShowEdit(false)}>
+                  Save Changes
+                </Button>
+              </Modal.Footer>
+            </Modal.Body>
+          )}
         </Form>
       </Modal>
 

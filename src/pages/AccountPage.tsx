@@ -9,11 +9,19 @@ import { useHistory } from "react-router-dom";
 
 import { accounts } from "../constants";
 
+type Account = {
+  id: number;
+  email: string;
+  password: string;
+  name: string;
+};
+
 const AccountPage = () => {
   let history = useHistory();
   const [show, setShow] = useState(false);
   const [showEdit, setShowEdit] = useState(false);
   const [showConfirm, setShowConfirm] = useState(false);
+  const [selected, setSelected] = useState<Account>();
 
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
@@ -22,7 +30,10 @@ const AccountPage = () => {
     handleShow();
   };
 
-  const onEditClick = () => {
+  const onEditClick = (id: any) => {
+    // @ts-ignore
+    let client = accounts.find((login: any) => login.id === id);
+    setSelected(client);
     setShowEdit(true);
   };
 
@@ -98,7 +109,7 @@ const AccountPage = () => {
                     </Button>
                     <Button
                       variant="secondary"
-                      onClick={onEditClick}
+                      onClick={() => onEditClick(account.id)}
                       style={{ marginRight: "24px" }}
                     >
                       Edit
@@ -152,35 +163,37 @@ const AccountPage = () => {
           <Modal.Title>Edit Account</Modal.Title>
         </Modal.Header>
         <Form>
-          <Modal.Body>
-            <Form.Group className="mb-3" controlId="formBasicEmail">
-              <Form.Label>Name</Form.Label>
-              <Form.Control type="text" />
-            </Form.Group>
+          {selected && (
+            <Modal.Body>
+              <Form.Group className="mb-3" controlId="formBasicEmail">
+                <Form.Label>Name</Form.Label>
+                <Form.Control type="text" defaultValue={selected.name} />
+              </Form.Group>
 
-            <Form.Group className="mb-3" controlId="formBasicEmail">
-              <Form.Label>Email address</Form.Label>
-              <Form.Control type="email" />
-            </Form.Group>
+              <Form.Group className="mb-3" controlId="formBasicEmail">
+                <Form.Label>Email address</Form.Label>
+                <Form.Control type="email" defaultValue={selected.email} />
+              </Form.Group>
 
-            <Form.Group className="mb-3" controlId="formBasicPassword">
-              <Form.Label>Password</Form.Label>
-              <Form.Control type="password" />
-            </Form.Group>
+              <Form.Group className="mb-3" controlId="formBasicPassword">
+                <Form.Label>Password</Form.Label>
+                <Form.Control type="password" />
+              </Form.Group>
 
-            <Modal.Footer>
-              <Button
-                variant="secondary"
-                onClick={() => setShowEdit(false)}
-                type="submit"
-              >
-                Close
-              </Button>
-              <Button variant="primary" onClick={() => setShowEdit(false)}>
-                Save Changes
-              </Button>
-            </Modal.Footer>
-          </Modal.Body>
+              <Modal.Footer>
+                <Button
+                  variant="secondary"
+                  onClick={() => setShowEdit(false)}
+                  type="submit"
+                >
+                  Close
+                </Button>
+                <Button variant="primary" onClick={() => setShowEdit(false)}>
+                  Save Changes
+                </Button>
+              </Modal.Footer>
+            </Modal.Body>
+          )}
         </Form>
       </Modal>
 
